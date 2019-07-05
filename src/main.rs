@@ -1,3 +1,5 @@
+extern crate disassembler;
+
 fn main() {
-    println!("Hello, world!");
+    println!("{}", disassembler::hello("leah"));
 }

@@ -1,4 +1,11 @@
 [[package]]
+name = "invaders-disassembler"
+version = "0.1.0"
+
+[[package]]
 name = "invaders_emulator"
 version = "0.1.0"
+dependencies = [
+ "invaders-disassembler 0.1.0",
+]
 

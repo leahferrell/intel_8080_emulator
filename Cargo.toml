@@ -4,4 +4,10 @@ version = "0.1.0"
 authors = ["Leah Ferrell <leahferrell03@gmail.com>"]
 edition = "2018"
 
-[dependencies]
+[lib]
+name = "invaders_emulator"
+path = "./src/lib.rs"
+
+[dependencies.invaders-disassembler]
+path = "src/disassembler"
+version = "0.1.0"

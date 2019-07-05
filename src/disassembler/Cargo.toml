@@ -1,0 +1,11 @@
+[package]
+name = "invaders-disassembler"
+version = "0.1.0"
+authors = ["Leah Ferrell <leahferrell03@gmail.com>"]
+edition = "2018"
+
+[lib]
+name = "disassembler"
+path = "src/lib.rs"
+
+[dependencies]
