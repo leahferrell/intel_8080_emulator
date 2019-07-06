@@ -2,7 +2,7 @@ use crate::state::State;
 use crate::instruction::Instruction;
 
 pub fn not_implemented(_state: &mut State, _instruction: &Instruction) -> bool {
-    println!("not implemented!");
+    println!("ERROR: {} has not been implemented!", _instruction.to_string());
     true
 }
 

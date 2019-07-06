@@ -12,7 +12,7 @@ pub fn determine_processing_unit(opcode: &OpCode) -> fn(&mut State, &Instruction
         INX => not_implemented,
         INR => not_implemented,
         DCR => not_implemented,
-        MVI => not_implemented,
+        MVI => immediate::move_immediate_data,
         RLC => not_implemented,
         DAD => not_implemented,
         LDAX => not_implemented,

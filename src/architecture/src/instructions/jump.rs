@@ -1,6 +1,10 @@
 use crate::state::State;
 use crate::instruction::Instruction;
 
+/// # Jump Instructions:
+///
+/// Instructions which alter the normal execution sequence of instructions.
+
 pub fn default(state: &mut State, instruction: &Instruction) -> bool {
     state.pc = instruction.get_addr() as usize;
     false
