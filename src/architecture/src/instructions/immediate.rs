@@ -31,7 +31,6 @@ pub fn load_register_pair(state: &mut State, instruction: &Instruction) -> bool 
         _ => ()
     };
 
-    //println!("loading #${:04x} into register pair {}", instruction.get_data(), reg);
     state.pc += instruction.num_of_bytes();
     false
 }
