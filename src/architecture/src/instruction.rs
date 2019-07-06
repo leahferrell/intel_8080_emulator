@@ -4,6 +4,7 @@ extern crate strum_macros;
 use crate::opcodes::OpCode;
 use crate::registers::Register;
 use crate::state::State;
+use crate::processor;
 
 pub struct Instruction{
     pub opcode: OpCode,
@@ -36,7 +37,7 @@ impl Instruction{
         self.operands.len() + 1
     }
 
-    pub fn execute(&self, state: &mut State) {
-        ()
+    pub fn execute(&self, state: &State) -> bool {
+        processor::determine_processing_unit(&self.opcode)(state)
     }
 }

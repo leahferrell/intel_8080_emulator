@@ -1,26 +1,33 @@
 use architecture::isa;
-use architecture::instruction::Instruction;
-use architecture::condition_codes::ConditionCodes;
 use architecture::state::State;
+use disassembler::parser;
 
-pub fn unimplemented_instruction(state: &mut State){
-    println!("Error: Unimplemented instruction");
+pub struct CpuContext {
+    pub state: State
 }
 
-pub fn emulate(state: &mut State){
-    let opcode = state.memory[state.pc];
-    let mem_end = state.memory.len();
-    let mut program_exit: bool = false;
+impl CpuContext {
 
-    while state.pc < mem_end && !program_exit {
-        let instr = isa::read_next(&state.memory, state.pc);
-        state.pc += instr.num_of_bytes();
-        program_exit = execute_instruction(state, instr);
+    pub fn load_program(program: &str) -> CpuContext {
+        let program_in_bytes = parser::parse(program).unwrap();
+        let state = State{
+            memory: program_in_bytes,
+            ..Default::default()
+        };
+
+        CpuContext{
+            state
+        }
     }
-}
 
-pub fn execute_instruction(state: &mut State, instruction: Instruction) -> bool {
+    pub fn run(&mut self){
+        let mem_end = self.state.memory.len();
+        let mut program_exit: bool = false;
 
-    unimplemented_instruction(state);
-    true
+        while self.state.pc < mem_end && !program_exit {
+            let instr = isa::read_next(&self.state.memory, self.state.pc);
+            self.state.pc += instr.num_of_bytes();
+            program_exit = instr.execute(&self.state);
+        }
+    }
 }

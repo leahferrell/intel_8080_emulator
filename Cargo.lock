@@ -26,6 +26,7 @@ name = "invaders-emulator"
 version = "0.1.0"
 dependencies = [
  "invaders-architecture 0.1.0",
+ "invaders-disassembler 0.1.0",
 ]
 
 [[package]]
