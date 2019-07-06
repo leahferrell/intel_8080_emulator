@@ -33,11 +33,27 @@ impl State {
         };
     }
 
+    pub fn push_return_addr(&mut self, ret: u16){
+        self.memory[self.sp-1] = ((ret >> 8) & 0xff) as u8;
+        self.memory[self.sp-2] = (ret & 0xff) as u8;
+        self.sp -= 2;
+    }
+
+    pub fn pop_return_addr(&mut self) -> u16 {
+        let addr1 = self.memory[self.sp-1];
+        let addr2 = self.memory[self.sp-2];
+
+        let ret = ((addr1 as u16) << 8) | addr2 as u16;
+
+        self.sp += 2;
+
+        ret
+    }
+
     pub fn debug(&self, instruction: String) {
         println!("*********************");
-        println!("Executed: {}",instruction);
+        println!("Executing: {} @ {:04x}",instruction, self.pc);
         println!("Registers: [a: {:02x}, b, {:02x}, c: {:02x}, d: {:02x}, e: {:02x}, h: {:02x}, l: {:02x}, m: {:02x}]", self.a, self.b, self.c, self.d, self.e, self.h, self.l, self.m);
-        println!("Program Counter: {:04x}", self.pc);
         println!("Stack Pointer: {:04x}", self.sp);
         println!("*********************");
     }

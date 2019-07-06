@@ -9,7 +9,7 @@ fn main() -> io::Result<()> {
 
     util::disassemble(program)?;
 
-    let mut cpu = CpuContext::load_program(program);
+    let mut cpu = CpuContext::load_program(program, 10000);
     cpu.run();
 
     Ok(())

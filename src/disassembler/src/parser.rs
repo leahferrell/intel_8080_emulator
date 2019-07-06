@@ -2,11 +2,17 @@ use std::fs::File;
 use std::io::Read;
 use std::io;
 
-pub fn parse(filename: &str) -> io::Result<(Vec<u8>)> {
+pub fn parse(filename: &str, mem_size: usize) -> io::Result<(Vec<u8>)> {
     let mut file=File::open(filename).unwrap();
-    let mut buffer = Vec::new();
+    let mut memory = vec![0; mem_size];
+    let mut program: Vec<u8> = vec![];
 
-    file.read_to_end(&mut buffer)?;
+    file.read_to_end(&mut program)?;
 
-    Ok(buffer)
+    //TODO: find a cleaner way to do this
+    for i in 0..program.len() {
+        memory[i] = program[i];
+    }
+
+    Ok(memory)
 }

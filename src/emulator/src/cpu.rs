@@ -8,13 +8,15 @@ pub struct CpuContext {
 
 impl CpuContext {
 
-    pub fn load_program(program: &str) -> CpuContext {
-        let program_in_bytes = parser::parse(program).unwrap();
+    pub fn load_program(program: &str, mem_size: usize) -> CpuContext {
+        let program_in_bytes = parser::parse(program, mem_size).unwrap();
 
         let state = State{
             memory: program_in_bytes,
             ..Default::default()
         };
+
+        println!("Set memory to: {}", state.memory.capacity());
 
         CpuContext{
             state
@@ -27,8 +29,8 @@ impl CpuContext {
 
         while self.state.pc < mem_end && !program_exit {
             let instr = isa::read_next(&self.state.memory, self.state.pc);
-            program_exit = instr.execute(&mut self.state);
             self.state.debug(instr.to_string());
+            program_exit = instr.execute(&mut self.state);
         }
     }
 }
