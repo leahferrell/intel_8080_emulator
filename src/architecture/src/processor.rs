@@ -4,7 +4,7 @@ use crate::state::State;
 use crate::instructions::*;
 use crate::instruction::Instruction;
 
-pub fn determine_processing_unit(opcode: &OpCode) -> fn(&State, &Instruction) -> bool {
+pub fn determine_processing_unit(opcode: &OpCode) -> fn(&mut State, &Instruction) -> bool {
     match opcode {
         NOP => nop::no_operation,
         LXI => immediate::load_register_pair,
@@ -43,7 +43,7 @@ pub fn determine_processing_unit(opcode: &OpCode) -> fn(&State, &Instruction) ->
         RNZ => not_implemented,
         POP => not_implemented,
         JNZ => not_implemented,
-        JMP => not_implemented,
+        JMP => jump::default,
         CNZ => not_implemented,
         PUSH => not_implemented,
         ADI => not_implemented,

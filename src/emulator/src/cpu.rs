@@ -27,8 +27,8 @@ impl CpuContext {
 
         while self.state.pc < mem_end && !program_exit {
             let instr = isa::read_next(&self.state.memory, self.state.pc);
-            self.state.pc += instr.num_of_bytes();
-            program_exit = instr.execute(&self.state);
+            program_exit = instr.execute(&mut self.state);
+            println!("Program counter set to: {:04x}", self.state.pc)
         }
     }
 }

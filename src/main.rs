@@ -1,5 +1,3 @@
-extern crate disassembler;
-
 use std::io;
 use std::result::Result::Ok;
 

@@ -1,8 +1,7 @@
-use crate::opcodes::OpCode;
 use crate::state::State;
 use crate::instruction::Instruction;
 
-pub fn not_implemented(state: &State, instruction: &Instruction) -> bool {
+pub fn not_implemented(_state: &mut State, _instruction: &Instruction) -> bool {
     println!("not implemented!");
     true
 }
