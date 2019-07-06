@@ -10,6 +10,7 @@ impl CpuContext {
 
     pub fn load_program(program: &str) -> CpuContext {
         let program_in_bytes = parser::parse(program).unwrap();
+
         let state = State{
             memory: program_in_bytes,
             ..Default::default()
