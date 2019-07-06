@@ -1,12 +1,13 @@
 [package]
-name = "invaders-disassembler"
+name = "invaders-architecture"
 version = "0.1.0"
 authors = ["Leah Ferrell <leahferrell03@gmail.com>"]
 edition = "2018"
 
 [lib]
-name = "disassembler"
+name = "architecture"
 path = "src/lib.rs"
 
-[dependencies.invaders-architecture]
-path = "../architecture"
+[dependencies]
+strum = "0.15.0"
+strum_macros = "0.15.0"

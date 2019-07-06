@@ -1,11 +1,11 @@
 [package]
-name = "invaders-disassembler"
+name = "invaders-emulator"
 version = "0.1.0"
 authors = ["Leah Ferrell <leahferrell03@gmail.com>"]
 edition = "2018"
 
 [lib]
-name = "disassembler"
+name = "emulator"
 path = "src/lib.rs"
 
 [dependencies.invaders-architecture]
