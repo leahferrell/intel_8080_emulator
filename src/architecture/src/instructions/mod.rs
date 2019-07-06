@@ -9,6 +9,7 @@ pub fn not_implemented(_state: &mut State, _instruction: &Instruction) -> bool {
 pub mod call;
 pub mod carry_bit;
 pub mod data;
+pub mod data_transfer;
 pub mod direct_addressing;
 pub mod double_register;
 pub mod hlt;

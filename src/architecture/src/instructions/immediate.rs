@@ -35,11 +35,51 @@ pub fn load_register_pair(state: &mut State, instruction: &Instruction) -> bool 
     false
 }
 
-pub fn move_immediate_data(state: &mut State, instruction: &Instruction) -> bool {
+pub fn move_data(state: &mut State, instruction: &Instruction) -> bool {
     let reg = &instruction.register[0];
     let data = instruction.operands[0];
 
     state.set_8bit_reg(reg, data);
     state.pc += instruction.num_of_bytes();
     false
+}
+
+pub fn add(state: &mut State, instruction: &Instruction) -> bool {
+    println!("ERROR: {} has not been implemented!", instruction.to_string());
+    true
+}
+
+pub fn add_with_carry(state: &mut State, instruction: &Instruction) -> bool {
+    println!("ERROR: {} has not been implemented!", instruction.to_string());
+    true
+}
+
+pub fn sub(state: &mut State, instruction: &Instruction) -> bool {
+    println!("ERROR: {} has not been implemented!", instruction.to_string());
+    true
+}
+
+pub fn sub_with_borrow(state: &mut State, instruction: &Instruction) -> bool {
+    println!("ERROR: {} has not been implemented!", instruction.to_string());
+    true
+}
+
+pub fn and(state: &mut State, instruction: &Instruction) -> bool {
+    println!("ERROR: {} has not been implemented!", instruction.to_string());
+    true
+}
+
+pub fn xor(state: &mut State, instruction: &Instruction) -> bool {
+    println!("ERROR: {} has not been implemented!", instruction.to_string());
+    true
+}
+
+pub fn or(state: &mut State, instruction: &Instruction) -> bool {
+    println!("ERROR: {} has not been implemented!", instruction.to_string());
+    true
+}
+
+pub fn compare(state: &mut State, instruction: &Instruction) -> bool {
+    println!("ERROR: {} has not been implemented!", instruction.to_string());
+    true
 }

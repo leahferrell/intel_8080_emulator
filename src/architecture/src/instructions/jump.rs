@@ -50,3 +50,8 @@ pub fn parity_even(state: &mut State, instruction: &Instruction) -> bool {
 pub fn parity_odd(state: &mut State, instruction: &Instruction) -> bool {
     condition(state, instruction, state.cc.p, 0)
 }
+
+pub fn load_pc(state: &mut State, instruction: &Instruction) -> bool {
+    println!("ERROR: {} has not been implemented!", instruction.to_string());
+    true
+}

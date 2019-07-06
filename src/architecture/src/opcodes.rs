@@ -19,12 +19,10 @@ pub enum OpCode {
     RRC,
     RAL,
     RAR,
-    RIM,
     SHLD,
     DAA,
     LHLD,
     CMA,
-    SIM,
     STA,
     STC,
     LDA,
@@ -84,5 +82,5 @@ pub enum OpCode {
     JM,
     EI,
     CM,
-    CPI
+    CPI,
 }

@@ -10,7 +10,6 @@ pub struct State {
     pub e: u8,
     pub h: u8,
     pub l: u8,
-    pub m: u8,
     pub pc: usize,
     pub sp: usize,
     pub memory: Vec<u8>,
@@ -28,7 +27,10 @@ impl State {
             Register::E => self.e = value,
             Register::H => self.h = value,
             Register::L => self.l = value,
-            Register::M => self.m = value,
+            Register::M => {
+                let mem = (((self.h as u16) << 8) | self.l as u16) as usize;
+                self.memory[mem] = value;
+            },
             _ => ()
         };
     }
@@ -50,10 +52,29 @@ impl State {
         ret
     }
 
+    pub fn move_reg_to_reg(&mut self, reg_to: &Register, reg_from: &Register){
+        let value = match reg_from {
+            Register::A => self.a,
+            Register::B => self.b,
+            Register::C => self.c,
+            Register::D => self.d,
+            Register::E => self.e,
+            Register::H => self.h,
+            Register::L => self.l,
+            Register::M => {
+                let mem = (((self.h as u16) << 8) | self.l as u16) as usize;
+                self.memory[mem]
+            },
+            _ => 0
+        };
+
+        self.set_8bit_reg(reg_to, value);
+    }
+
     pub fn debug(&self, instruction: String) {
         println!("*********************");
         println!("Executing: {} @ {:04x}",instruction, self.pc);
-        println!("Registers: [a: {:02x}, b, {:02x}, c: {:02x}, d: {:02x}, e: {:02x}, h: {:02x}, l: {:02x}, m: {:02x}]", self.a, self.b, self.c, self.d, self.e, self.h, self.l, self.m);
+        println!("Registers: [a: {:02x}, b, {:02x}, c: {:02x}, d: {:02x}, e: {:02x}, h: {:02x}, l: {:02x}]", self.a, self.b, self.c, self.d, self.e, self.h, self.l);
         println!("Stack Pointer: {:04x}", self.sp);
         println!("*********************");
     }
