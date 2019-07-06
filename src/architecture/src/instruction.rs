@@ -38,6 +38,6 @@ impl Instruction{
     }
 
     pub fn execute(&self, state: &State) -> bool {
-        processor::determine_processing_unit(&self.opcode)(state)
+        processor::determine_processing_unit(&self.opcode)(state, self)
     }
 }
