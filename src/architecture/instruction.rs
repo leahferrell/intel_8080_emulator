@@ -6,6 +6,7 @@ use crate::architecture::registers::Register;
 use crate::architecture::state::State;
 use crate::architecture::processor;
 
+#[derive(Debug, Eq, PartialEq)]
 pub struct Instruction{
     pub opcode: OpCode,
     pub register: Vec<Register>,
@@ -47,5 +48,15 @@ impl Instruction{
 
     pub fn execute(&self, state: &mut State) -> bool {
         processor::determine_processing_unit(&self.opcode)(state, self)
+    }
+}
+
+impl Default for Instruction {
+    fn default() -> Instruction {
+        Instruction {
+            opcode: OpCode::NOP,
+            register: vec![],
+            operands: vec![]
+        }
     }
 }

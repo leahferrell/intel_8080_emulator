@@ -3,7 +3,7 @@ extern crate strum_macros;
 
 use strum_macros::Display;
 
-#[derive(Display, Debug)]
+#[derive(Display, Debug, Eq, PartialEq)]
 pub enum Register {
     A,
     B,

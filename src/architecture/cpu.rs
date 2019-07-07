@@ -1,6 +1,7 @@
 use crate::architecture::isa;
 use crate::architecture::state::State;
 use crate::disassembler::parser;
+use crate::architecture::condition_codes::ConditionCodes;
 
 pub struct CpuContext {
     pub state: State
@@ -13,6 +14,14 @@ impl CpuContext {
 
         let state = State{
             memory: program_in_bytes,
+            cc: ConditionCodes {
+                z: true,
+                s: true,
+                p: true,
+                cy: true,
+                ac: true,
+                pad: 3
+            },
             ..Default::default()
         };
 
