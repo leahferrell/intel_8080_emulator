@@ -1,6 +1,7 @@
 use crate::architecture::state::State;
 use crate::architecture::instruction::Instruction;
 use crate::architecture::registers::Register;
+use crate::architecture::units::memory_unit;
 
 
 /// # Data Instructions:
@@ -9,7 +10,9 @@ use crate::architecture::registers::Register;
 /// memory and registers.
 
 pub fn move_reg(state: &mut State, instruction: &Instruction) -> bool {
-    state.move_reg_to_reg(&instruction.register[0], &instruction.register[1]);
+    let value = memory_unit::get_reg_value(state, &instruction.register[0]);
+
+    memory_unit::set_reg_value(state, &instruction.register[1], value);
 
     state.pc += instruction.num_of_bytes();
     false
@@ -18,20 +21,9 @@ pub fn move_reg(state: &mut State, instruction: &Instruction) -> bool {
 pub fn load_accumulator(state: &mut State, instruction: &Instruction) -> bool {
     let reg = &instruction.register[0];
 
-    let addr = match reg {
-        Register::B => (state.b, state.c),
-        Register::D => (state.d, state.e),
-        Register::H => (state.h, state.l),
-        _ => (0,0),
-    };
+    let data = memory_unit::get_reg_mem_value(state, &instruction.register[0]);
 
-    let addr = (((addr.0 as u16) << 8) | addr.1 as u16) as usize;
-
-    println!("Getting data from: #${:04x}",addr);
-
-    let data = state.memory[addr];
-
-    state.set_8bit_reg(&Register::A, data);
+    memory_unit::set_reg_value(state, &Register::A, data);
 
     state.pc += instruction.num_of_bytes();
     false

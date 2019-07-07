@@ -1,6 +1,7 @@
 use crate::architecture::state::State;
 use crate::architecture::instruction::Instruction;
 use crate::architecture::registers::Register;
+use crate::architecture::units::memory_unit;
 
 
 /// # Immediate Instructions:
@@ -12,24 +13,7 @@ pub fn load_register_pair(state: &mut State, instruction: &Instruction) -> bool 
     let reg = &instruction.register[0];
     let data = &instruction.operands;
 
-    match reg {
-        Register::B => {
-            state.b = data[0];
-            state.c = data[1];
-        },
-        Register::D => {
-            state.d = data[0];
-            state.c = data[1];
-        },
-        Register::H => {
-            state.h = data[0];
-            state.l = data[1];
-        },
-        Register::SP => {
-            state.sp = instruction.get_addr() as usize;
-        },
-        _ => ()
-    };
+    memory_unit::set_mem_loc_in_reg(state, &instruction.register[0], &instruction.operands);
 
     state.pc += instruction.num_of_bytes();
     false
@@ -39,7 +23,7 @@ pub fn move_data(state: &mut State, instruction: &Instruction) -> bool {
     let reg = &instruction.register[0];
     let data = instruction.operands[0];
 
-    state.set_8bit_reg(reg, data);
+    memory_unit::set_reg_value(state, reg, data);
     state.pc += instruction.num_of_bytes();
     false
 }

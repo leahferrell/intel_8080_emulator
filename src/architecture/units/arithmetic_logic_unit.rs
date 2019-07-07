@@ -30,8 +30,7 @@ pub fn twos_complement(num: u8) -> u8 {
 }
 
 pub fn compute_parity(x: u8) -> bool {
-    let mut y = 0;
-    y = x ^ (x >> 1);
+    let mut y = x ^ (x >> 1);
     y = y ^ (y >> 2);
     y = y ^ (y >> 4);
     y % 2 == 0
