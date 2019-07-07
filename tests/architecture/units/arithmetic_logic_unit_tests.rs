@@ -1,13 +1,16 @@
 extern crate architecture;
 
+use architecture::units::arithmetic_logic_unit;
+
+
 #[cfg(test)]
 mod tests {
-    use crate::architecture::condition_codes::ConditionCodes;
-    use architecture::units::arithmetic_logic_unit::*;
+    use super::*;
+    use crate::condition_codes::ConditionCodes;
 
     #[test]
     fn test_add_happy_path() {
-        let mut cc = ConditionCodes{
+        let &mut cc = ConditionCodes{
             z: 0,
             s: 0,
             p: 0,
@@ -18,8 +21,8 @@ mod tests {
 
         let bytes = vec![0x00,0x00];
 
-        let result = add(bytes,&mut cc);
+        let result = add(bytes,cc);
 
-        assert_eq!(result, 0x00);
+        assert_eq!(result, vec![0x00,0x00]);
     }
 }

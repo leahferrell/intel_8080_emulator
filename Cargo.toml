@@ -8,11 +8,6 @@ edition = "2018"
 name = "invaders_emulator"
 path = "./src/lib.rs"
 
-[dependencies.invaders-disassembler]
-path = "src/disassembler"
-
-[dependencies.invaders-emulator]
-path = "src/emulator"
-
-[dependencies.invaders-architecture]
-path = "src/architecture"
+[dependencies]
+strum = "0.15.0"
+strum_macros = "0.15.0"
