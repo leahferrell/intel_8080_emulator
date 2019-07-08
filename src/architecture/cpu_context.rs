@@ -46,7 +46,7 @@ impl CpuContext {
     }
 
     // TODO: Determine how many cycles each step takes & potentially add a "cycles remaining" param to each instruction
-    //       or really just figure out how to get proper timings....
+    //       Really just need to figure out how to get proper timings....
     fn cycle(&mut self){
         // TODO
         // 1. Check input queue and update accordingly (ex: interrupts, etc.)
