@@ -1,8 +1,8 @@
 use std::io;
 use std::result::Result::Ok;
 
-use invaders_emulator::architecture::cpu_context::CpuContext;
-use invaders_emulator::disassembler;
+use intel_8080_emulator::architecture::cpu_context::CpuContext;
+use intel_8080_emulator::disassembler;
 
 fn main() -> io::Result<()> {
     let program = "resources/invaders.rom";
