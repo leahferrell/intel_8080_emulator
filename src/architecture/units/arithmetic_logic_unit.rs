@@ -14,6 +14,32 @@ pub fn add(num1: u8, num2:u8) -> (u8, ConditionCodes) {
     (sum as u8, conditions)
 }
 
+pub fn double_add(num1: (u8,u8), num2:(u8,u8)) -> ((u8,u8), ConditionCodes) {
+    let mut conditions = ConditionCodes{..Default::default()};
+
+    let sum = (u8_to_u16(num1.0, num1.1) as u32) + (u8_to_u16(num2.0, num2.1) as u32);
+
+    let split_sum = u16_to_u8(sum as u16);
+
+    conditions.z = (sum & 0xffff) == 0;
+    conditions.s = (sum & 0x8000) > 0;
+    conditions.cy = sum > 0xffff;
+    conditions.p = compute_parity_u16(split_sum);
+    conditions.ac = (num1.1 < 0x80 && num2.1 < 0x80) && sum >= 0x8000;
+
+    (split_sum, conditions)
+}
+
+pub fn u8_to_u16(num1: u8, num2: u8) -> u16 {
+    ((num1 as u16) << 8) | num2 as u16
+}
+
+pub fn u16_to_u8(num: u16) -> (u8,u8) {
+    let num1 = ((num >> 8) & 0xff) as u8;
+    let num2 = (num & 0xff) as u8;
+    (num1,num2)
+}
+
 pub fn sub(num1: u8, num2: u8) -> (u8, ConditionCodes) {
     let mut result = add(num1, twos_complement(num2));
     result.1.cy = !result.1.cy;
@@ -38,6 +64,12 @@ pub fn compute_parity(x: u8) -> bool {
     y = y ^ (y >> 2);
     y = y ^ (y >> 4);
     y % 2 == 0
+}
+
+pub fn compute_parity_u16(num: (u8,u8)) -> bool {
+    let num1 = compute_parity(num.0);
+    let num2 = compute_parity(num.1);
+    !(num1 ^ num2)
 }
 
 #[cfg(test)]
