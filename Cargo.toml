@@ -1,11 +1,11 @@
 [package]
-name = "invaders_emulator"
+name = "intel_8080_emulator"
 version = "0.1.0"
 authors = ["Leah Ferrell <leahferrell03@gmail.com>"]
 edition = "2018"
 
 [lib]
-name = "invaders_emulator"
+name = "intel_8080_emulator"
 path = "./src/lib.rs"
 
 [dependencies]
