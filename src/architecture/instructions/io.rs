@@ -1,7 +1,7 @@
-use crate::architecture::state::State;
-use crate::architecture::instruction::Instruction;
-use crate::architecture::registers::Register;
-
+use crate::architecture::model::state::State;
+use crate::architecture::model::instruction::Instruction;
+use crate::architecture::units::memory_unit;
+use crate::architecture::model::registers::Register;
 
 /// # Input/Output Instructions:
 ///
@@ -13,6 +13,11 @@ pub fn input(state: &mut State, instruction: &Instruction) -> bool {
 }
 
 pub fn output(state: &mut State, instruction: &Instruction) -> bool {
-    println!("ERROR: {} has not been implemented!", instruction.to_string());
-    true
+    let value = memory_unit::get_reg_value(state, &Register::A);
+
+    println!("outputting the following data: {:02x}", value);
+
+    state.pc += instruction.num_of_bytes();
+
+    false
 }

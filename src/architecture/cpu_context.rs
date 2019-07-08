@@ -1,7 +1,7 @@
-use crate::architecture::isa;
-use crate::architecture::state::State;
+use crate::architecture::instruction_set;
+use crate::architecture::model::condition_codes::ConditionCodes;
+use crate::architecture::model::state::State;
 use crate::disassembler::parser;
-use crate::architecture::condition_codes::ConditionCodes;
 
 pub struct CpuContext {
     pub state: State
@@ -19,8 +19,7 @@ impl CpuContext {
                 s: true,
                 p: true,
                 cy: true,
-                ac: true,
-                pad: 3
+                ac: true
             },
             ..Default::default()
         };
@@ -37,8 +36,8 @@ impl CpuContext {
         let mut program_exit: bool = false;
 
         while self.state.pc < mem_end && !program_exit {
-            let instr = isa::read_next(&self.state.memory, self.state.pc);
-            self.state.debug(instr.to_string());
+            let instr = instruction_set::read_next(&self.state.memory, self.state.pc);
+            //self.state.debug(instr.to_string());
             program_exit = instr.execute(&mut self.state);
         }
     }

@@ -1,6 +1,5 @@
-use crate::architecture::condition_codes::ConditionCodes;
-use crate::architecture::state::State;
-use crate::architecture::registers::Register;
+use crate::architecture::model::state::State;
+use crate::architecture::model::registers::Register;
 use crate::architecture::units::arithmetic_logic_unit;
 
 pub fn get_reg_value(state: &State, reg: &Register) -> u8 {

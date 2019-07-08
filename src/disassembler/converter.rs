@@ -1,6 +1,5 @@
-
-use crate::architecture::isa;
-use crate::architecture::instruction::Instruction;
+use crate::architecture::model::instruction::Instruction;
+use crate::architecture::instruction_set;
 
 pub fn convert_to_assembly(buf: Vec<u8>) -> Vec<Instruction> {
     let mut ptr:usize = 0;
@@ -9,7 +8,7 @@ pub fn convert_to_assembly(buf: Vec<u8>) -> Vec<Instruction> {
     let mut instructions: Vec<Instruction> = Vec::new();
 
     while ptr < buf.len() {
-        let instr = isa::read_next(&buf, ptr);
+        let instr = instruction_set::read_next(&buf, ptr);
         ptr += instr.num_of_bytes();
         instructions.push(instr);
     }

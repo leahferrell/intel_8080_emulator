@@ -1,9 +1,7 @@
-use crate::architecture::instruction::Instruction;
 use std::fs::File;
 use std::io::prelude::*;
 use std::io::LineWriter;
-use crate::disassembler::parser;
-use crate::disassembler::converter;
+use crate::architecture::model::instruction::Instruction;
 
 pub fn print_in_hex(buf: Vec<u8>, chunk_size: usize){
     let mut counter = 0;

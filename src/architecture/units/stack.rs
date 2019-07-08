@@ -1,5 +1,5 @@
-use crate::architecture::state::State;
-use crate::architecture::registers::Register;
+use crate::architecture::model::state::State;
+use crate::architecture::model::registers::Register;
 
 pub fn push_return_addr(state: &mut State, ret: u16){
     let ret1 = ((ret >> 8) & 0xff) as u8;

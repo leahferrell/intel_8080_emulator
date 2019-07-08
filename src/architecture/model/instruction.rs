@@ -1,10 +1,11 @@
 extern crate strum;
 extern crate strum_macros;
 
-use crate::architecture::opcodes::OpCode;
-use crate::architecture::registers::Register;
-use crate::architecture::state::State;
-use crate::architecture::processor;
+use crate::architecture::model::opcodes::OpCode;
+use crate::architecture::model::registers::Register;
+use crate::architecture::model::state::State;
+use crate::architecture::units::processing_unit;
+
 
 #[derive(Debug, Eq, PartialEq)]
 pub struct Instruction{
@@ -47,7 +48,7 @@ impl Instruction{
     }
 
     pub fn execute(&self, state: &mut State) -> bool {
-        processor::determine_processing_unit(&self.opcode)(state, self)
+        processing_unit::determine_processing_unit(&self.opcode)(state, self)
     }
 }
 

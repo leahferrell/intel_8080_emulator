@@ -1,6 +1,6 @@
-use crate::architecture::instruction::Instruction;
-use crate::architecture::opcodes::OpCode;
-use crate::architecture::registers::Register;
+use crate::architecture::model::instruction::Instruction;
+use crate::architecture::model::opcodes::OpCode;
+use crate::architecture::model::registers::Register;
 
 pub fn read_next(buf: &Vec<u8>, ix: usize) -> Instruction {
     let code = buf[ix];

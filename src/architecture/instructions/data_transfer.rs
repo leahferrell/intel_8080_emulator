@@ -1,8 +1,7 @@
-use crate::architecture::state::State;
-use crate::architecture::instruction::Instruction;
-use crate::architecture::registers::Register;
+use crate::architecture::model::state::State;
 use crate::architecture::units::memory_unit;
-
+use crate::architecture::model::instruction::Instruction;
+use crate::architecture::model::registers::Register;
 
 /// # Data Instructions:
 ///
@@ -19,8 +18,6 @@ pub fn move_reg(state: &mut State, instruction: &Instruction) -> bool {
 }
 
 pub fn load_accumulator(state: &mut State, instruction: &Instruction) -> bool {
-    let reg = &instruction.register[0];
-
     let data = memory_unit::get_reg_mem_value(state, &instruction.register[0]);
 
     memory_unit::set_reg_value(state, &Register::A, data);

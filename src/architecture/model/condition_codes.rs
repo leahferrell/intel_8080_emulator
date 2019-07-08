@@ -5,8 +5,7 @@ pub struct ConditionCodes {
     pub s: bool,
     pub p: bool,
     pub cy: bool,
-    pub ac: bool,
-    pub pad: u8
+    pub ac: bool
 }
 
 impl ConditionCodes {
@@ -40,40 +39,40 @@ mod tests {
 
     #[test]
     fn test_all_conditions_false() {
-        let cc = ConditionCodes{z: false,s: false,p: false,cy: false,ac: false,pad: 0};
+        let cc = ConditionCodes{z: false,s: false,p: false,cy: false,ac: false};
         assert_eq!(cc.as_binary(), 0x02);
     }
 
     #[test]
     fn test_all_conditions_true() {
-        let cc = ConditionCodes{z: true,s: true,p: true,cy: true,ac: true,pad: 0};
+        let cc = ConditionCodes{z: true,s: true,p: true,cy: true,ac: true};
         assert_eq!(cc.as_binary(), 0xd7);
     }
 
     #[test]
     fn test_some_conditions_true() {
-        let cc = ConditionCodes{z: false,s: false,p: true,cy: false,ac: true,pad: 0};
+        let cc = ConditionCodes{z: false,s: false,p: true,cy: false,ac: true};
         assert_eq!(cc.as_binary(), 0x16);
     }
 
     #[test]
     fn test_update_all_conditions_false() {
-        let mut cc = ConditionCodes{z: false,s: false,p: false,cy: false,ac: false,pad: 0};
+        let mut cc = ConditionCodes{z: false,s: false,p: false,cy: false,ac: false};
         cc.update_from_binary(0x02);
-        assert_eq!(cc, ConditionCodes{z: false,s: false,p: false,cy: false,ac: false,pad: 0});
+        assert_eq!(cc, ConditionCodes{z: false,s: false,p: false,cy: false,ac: false});
     }
 
     #[test]
     fn test_update_all_conditions_true() {
-        let mut cc = ConditionCodes{z: false,s: false,p: false,cy: false,ac: false,pad: 0};
+        let mut cc = ConditionCodes{z: false,s: false,p: false,cy: false,ac: false};
         cc.update_from_binary(0xd7);
-        assert_eq!(cc, ConditionCodes{z: true,s: true,p: true,cy: true,ac: true,pad: 0});
+        assert_eq!(cc, ConditionCodes{z: true,s: true,p: true,cy: true,ac: true});
     }
 
     #[test]
     fn test_update_some_conditions_true() {
-        let mut cc = ConditionCodes{z: false,s: false,p: false,cy: false,ac: false,pad: 0};
+        let mut cc = ConditionCodes{z: false,s: false,p: false,cy: false,ac: false};
         cc.update_from_binary(0x16);
-        assert_eq!(cc, ConditionCodes{z: false,s: false,p: true,cy: false,ac: true,pad: 0});
+        assert_eq!(cc, ConditionCodes{z: false,s: false,p: true,cy: false,ac: true});
     }
 }

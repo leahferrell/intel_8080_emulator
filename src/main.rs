@@ -1,7 +1,7 @@
 use std::io;
 use std::result::Result::Ok;
 
-use invaders_emulator::architecture::cpu::CpuContext;
+use invaders_emulator::architecture::cpu_context::CpuContext;
 use invaders_emulator::disassembler;
 
 fn main() -> io::Result<()> {

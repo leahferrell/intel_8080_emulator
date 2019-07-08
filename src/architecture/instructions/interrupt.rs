@@ -1,7 +1,5 @@
-use crate::architecture::state::State;
-use crate::architecture::instruction::Instruction;
-use crate::architecture::registers::Register;
-
+use crate::architecture::model::state::State;
+use crate::architecture::model::instruction::Instruction;
 
 /// # Interrupt Instructions:
 ///

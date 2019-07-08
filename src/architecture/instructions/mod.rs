@@ -1,11 +1,3 @@
-use crate::architecture::state::State;
-use crate::architecture::instruction::Instruction;
-
-pub fn not_implemented(_state: &mut State, _instruction: &Instruction) -> bool {
-    println!("ERROR: {} has not been implemented!", _instruction.to_string());
-    true
-}
-
 pub mod carry_bit;
 pub mod data;
 pub mod data_transfer;

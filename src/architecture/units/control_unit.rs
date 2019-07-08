@@ -1,7 +1,6 @@
-use crate::architecture::state::State;
-use crate::architecture::instruction::Instruction;
+use crate::architecture::model::state::State;
+use crate::architecture::model::instruction::Instruction;
 use crate::architecture::units::stack;
-use crate::architecture::opcodes::OpCode::*;
 
 pub fn default(state: &mut State, instruction: &Instruction) -> bool {
 

@@ -1,9 +1,9 @@
-use crate::architecture::opcodes::OpCode;
-use crate::architecture::opcodes::OpCode::*;
-use crate::architecture::state::State;
 use crate::architecture::instructions::*;
-use crate::architecture::instruction::Instruction;
+use crate::architecture::model::instruction::Instruction;
+use crate::architecture::model::opcodes::OpCode;
+use crate::architecture::model::state::State;
 use crate::architecture::units::control_unit;
+use crate::architecture::model::opcodes::OpCode::*;
 
 pub fn determine_processing_unit(opcode: &OpCode) -> fn(&mut State, &Instruction) -> bool {
     match opcode {

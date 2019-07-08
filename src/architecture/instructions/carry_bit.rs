@@ -1,7 +1,5 @@
-use crate::architecture::state::State;
-use crate::architecture::instruction::Instruction;
-use crate::architecture::registers::Register;
-
+use crate::architecture::model::state::State;
+use crate::architecture::model::instruction::Instruction;
 
 /// # Carry Bit Instructions:
 ///
@@ -26,10 +24,13 @@ mod tests {
     use crate::architecture::condition_codes::ConditionCodes;
     use crate::architecture::instruction::Instruction;
     use crate::architecture::opcodes::OpCode;
+    use crate::architecture::model::condition_codes::ConditionCodes;
+    use crate::architecture::model::instruction::Instruction;
+    use crate::architecture::model::opcodes::OpCode;
 
     #[test]
     fn test_complement() {
-        let mut cc = ConditionCodes{z: false,s: false,p: false,cy: false,ac: false,pad: 0};
+        let mut cc = ConditionCodes{z: false,s: false,p: false,cy: false,ac: false};
         let mut state = State {cc,..Default::default()};
         let instruction = &Instruction{opcode:OpCode::CMC,..Default::default()};
 
@@ -41,7 +42,7 @@ mod tests {
 
     #[test]
     fn test_complement_while_already_set() {
-        let mut cc = ConditionCodes{z: false,s: false,p: false,cy: true,ac: false,pad: 0};
+        let mut cc = ConditionCodes{z: false,s: false,p: false,cy: true,ac: false};
         let mut state = State {cc,..Default::default()};
         let instruction = &Instruction{opcode:OpCode::CMC,..Default::default()};
 
@@ -53,7 +54,7 @@ mod tests {
 
     #[test]
     fn test_set() {
-        let mut cc = ConditionCodes{z: false,s: false,p: false,cy: false,ac: false,pad: 0};
+        let mut cc = ConditionCodes{z: false,s: false,p: false,cy: false,ac: false};
         let mut state = State {cc,..Default::default()};
         let instruction = &Instruction{opcode:OpCode::STC,..Default::default()};
 
@@ -65,7 +66,7 @@ mod tests {
 
     #[test]
     fn test_set_while_already_set() {
-        let mut cc = ConditionCodes{z: false,s: false,p: false,cy: true,ac: false,pad: 0};
+        let mut cc = ConditionCodes{z: false,s: false,p: false,cy: true,ac: false};
         let mut state = State {cc,..Default::default()};
         let instruction = &Instruction{opcode:OpCode::STC,..Default::default()};
 

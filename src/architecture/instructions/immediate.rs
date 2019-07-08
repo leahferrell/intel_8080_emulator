@@ -1,9 +1,8 @@
-use crate::architecture::state::State;
-use crate::architecture::instruction::Instruction;
-use crate::architecture::registers::Register;
+use crate::architecture::model::state::State;
+use crate::architecture::model::instruction::Instruction;
 use crate::architecture::units::memory_unit;
+use crate::architecture::model::registers::Register;
 use crate::architecture::units::arithmetic_logic_unit;
-
 
 /// # Immediate Instructions:
 ///
@@ -11,11 +10,7 @@ use crate::architecture::units::arithmetic_logic_unit;
 /// which are part of the instruction itself.
 
 pub fn load_register_pair(state: &mut State, instruction: &Instruction) -> bool {
-    let reg = &instruction.register[0];
-    let data = &instruction.operands;
-
     memory_unit::set_mem_loc_in_reg(state, &instruction.register[0], &instruction.operands);
-
     state.pc += instruction.num_of_bytes();
     false
 }

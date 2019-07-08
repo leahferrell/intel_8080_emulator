@@ -1,10 +1,6 @@
-pub mod instruction;
-pub mod isa;
-pub mod opcodes;
-pub mod registers;
-pub mod condition_codes;
-pub mod state;
-pub mod processor;
+pub mod instruction_set;
 pub mod instructions;
 pub mod units;
-pub mod cpu;
+pub mod cpu_context;
+pub mod devices;
+pub mod model;
