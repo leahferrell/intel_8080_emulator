@@ -7,7 +7,7 @@ use intel_8080_emulator::disassembler;
 fn main() -> io::Result<()> {
     let program = "resources/invaders.rom";
 
-    disassembler::disassemble(program)?;
+    disassembler::disassemble(program, false)?;
 
     let mut cpu = CpuContext::load_program(program, 0xffff);
     cpu.run();

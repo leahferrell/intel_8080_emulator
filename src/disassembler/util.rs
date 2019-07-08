@@ -25,14 +25,18 @@ pub fn print_instructions(instructions: Vec<Instruction>){
     }
 }
 
-pub fn write_instructions_to_file(instructions: Vec<Instruction>, filename: &str) -> std::io::Result<()>{
+pub fn write_instructions_to_file(instructions: Vec<Instruction>, filename: &str, with_address: bool) -> std::io::Result<()>{
     let file = File::create(filename)?;
     let mut file = LineWriter::new(file);
 
     let mut counter:usize = 0;
 
     for i in instructions {
-        let line = format!("{:04x} {}\n", counter, i.to_string());
+        let line = if with_address {
+            format!("{:04x} {}\n", counter, i.to_string())
+        }else{
+            format!("{}\n", i.to_string())
+        };
         file.write_all(line.as_bytes())?;
         counter += i.size();
     }
