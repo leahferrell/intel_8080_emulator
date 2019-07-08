@@ -8,25 +8,23 @@ use crate::architecture::model::registers::Register;
 /// Instructions which transfer data between registers or between
 /// memory and registers.
 
-pub fn move_reg(state: &mut State, instruction: &Instruction) -> bool {
+pub fn move_reg(state: &mut State, instruction: &Instruction)-> usize {
     let value = memory_unit::get_reg_value(state, &instruction.register[1]);
 
     memory_unit::set_reg_value(state, &instruction.register[0], value);
 
-    state.pc += instruction.num_of_bytes();
-    false
+    state.pc + instruction.size()
 }
 
-pub fn load_accumulator(state: &mut State, instruction: &Instruction) -> bool {
+pub fn load_accumulator(state: &mut State, instruction: &Instruction)-> usize {
     let data = memory_unit::get_reg_mem_value(state, &instruction.register[0]);
 
     memory_unit::set_reg_value(state, &Register::A, data);
 
-    state.pc += instruction.num_of_bytes();
-    false
+    state.pc + instruction.size()
 }
 
-pub fn store_accumulator(state: &mut State, instruction: &Instruction) -> bool {
+pub fn store_accumulator(state: &mut State, instruction: &Instruction)-> usize {
     println!("ERROR: {} has not been implemented!", instruction.to_string());
-    true
+    state.pc
 }

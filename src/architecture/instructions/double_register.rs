@@ -9,19 +9,17 @@ use crate::architecture::model::registers::Register;
 ///
 /// Instructions which operate on pairs of registers
 
-pub fn push(state: &mut State, instruction: &Instruction) -> bool {
+pub fn push(state: &mut State, instruction: &Instruction)-> usize {
     stack::push_reg(state, &instruction.register[0]);
-    state.pc += instruction.num_of_bytes();
-    false
+    state.pc + instruction.size()
 }
 
-pub fn pop(state: &mut State, instruction: &Instruction) -> bool {
+pub fn pop(state: &mut State, instruction: &Instruction)-> usize {
     stack::pop_to_reg(state, &instruction.register[0]);
-    state.pc += instruction.num_of_bytes();
-    false
+    state.pc + instruction.size()
 }
 
-pub fn double_add(state: &mut State, instruction: &Instruction) -> bool {
+pub fn double_add(state: &mut State, instruction: &Instruction)-> usize {
     let reg_pair_val = memory_unit::get_double_reg_value(state, &instruction.register[0]);
     let hl_pair_val = memory_unit::get_double_reg_value(state, &Register::H);
     let result = arithmetic_logic_unit::double_add(reg_pair_val, hl_pair_val);
@@ -30,40 +28,34 @@ pub fn double_add(state: &mut State, instruction: &Instruction) -> bool {
 
     memory_unit::set_double_reg_value(state, &Register::H, result.0);
 
-    state.pc += instruction.num_of_bytes();
-
-    false
+    state.pc + instruction.size()
 }
 
-pub fn increment(state: &mut State, instruction: &Instruction) -> bool {
+pub fn increment(state: &mut State, instruction: &Instruction)-> usize {
     let reg = &instruction.register[0];
 
     let reg_pair = memory_unit::get_double_reg_value(state, reg);
     let result = arithmetic_logic_unit::double_add(reg_pair, (0,1));
     memory_unit::set_double_reg_value(state, reg, result.0);
-    state.pc += instruction.num_of_bytes();
-
-    false
+    state.pc + instruction.size()
 }
 
-pub fn decrement(state: &mut State, instruction: &Instruction) -> bool {
+pub fn decrement(state: &mut State, instruction: &Instruction)-> usize {
     println!("ERROR: {} has not been implemented!", instruction.to_string());
-    true
+    state.pc
 }
 
-pub fn exchange(state: &mut State, instruction: &Instruction) -> bool {
+pub fn exchange(state: &mut State, instruction: &Instruction)-> usize {
     let hl_pair_val = memory_unit::get_double_reg_value(state, &Register::H);
     let de_pair_val = memory_unit::get_double_reg_value(state, &Register::D);
 
     memory_unit::set_double_reg_value(state, &Register::H, de_pair_val);
     memory_unit::set_double_reg_value(state, &Register::D, hl_pair_val);
 
-    state.pc += instruction.num_of_bytes();
-
-    false
+    state.pc + instruction.size()
 }
 
-pub fn exchange_sp(state: &mut State, instruction: &Instruction) -> bool {
+pub fn exchange_sp(state: &mut State, instruction: &Instruction)-> usize {
     let sp1_loc = memory_unit::get_double_reg_value(state, &Register::SP);
     let sp2_loc = arithmetic_logic_unit::double_add(sp1_loc, (0,1)).0;
 
@@ -76,15 +68,11 @@ pub fn exchange_sp(state: &mut State, instruction: &Instruction) -> bool {
     memory_unit::set_mem_value(state, sp1_loc, hl_pair_val.1);
     memory_unit::set_mem_value(state, sp2_loc, hl_pair_val.0);
 
-    state.pc += instruction.num_of_bytes();
-
-    false
+    state.pc + instruction.size()
 }
 
-pub fn load_sp_from_hl(state: &mut State, instruction: &Instruction) -> bool {
+pub fn load_sp_from_hl(state: &mut State, instruction: &Instruction)-> usize {
     let hl_pair_val = memory_unit::get_double_reg_value(state, &Register::H);
     memory_unit::set_double_reg_value(state, &Register::SP, hl_pair_val);
-    state.pc += instruction.num_of_bytes();
-
-    false
+    state.pc + instruction.size()
 }

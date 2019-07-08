@@ -7,12 +7,12 @@ use crate::architecture::units::arithmetic_logic_unit;
 ///
 /// Instructions which operate on a single register or memory location.
 
-pub fn increment(state: &mut State, instruction: &Instruction) -> bool {
+pub fn increment(state: &mut State, instruction: &Instruction) -> usize {
     println!("ERROR: {} has not been implemented!", instruction.to_string());
-    true
+    state.pc
 }
 
-pub fn decrement(state: &mut State, instruction: &Instruction) -> bool {
+pub fn decrement(state: &mut State, instruction: &Instruction) -> usize {
     let value = memory_unit::get_reg_value(state, &instruction.register[0]);
 
     let result = arithmetic_logic_unit::sub(value, 1);
@@ -24,17 +24,15 @@ pub fn decrement(state: &mut State, instruction: &Instruction) -> bool {
     state.cc.p = result.1.p;
     state.cc.ac = result.1.ac;
 
-    state.pc += instruction.num_of_bytes();
-
-    false
+    state.pc + instruction.size()
 }
 
-pub fn complement_accumulator(state: &mut State, instruction: &Instruction) -> bool {
+pub fn complement_accumulator(state: &mut State, instruction: &Instruction) -> usize {
     println!("ERROR: {} has not been implemented!", instruction.to_string());
-    true
+    state.pc
 }
 
-pub fn decimal_adjust_accumulator(state: &mut State, instruction: &Instruction) -> bool {
+pub fn decimal_adjust_accumulator(state: &mut State, instruction: &Instruction) -> usize {
     println!("ERROR: {} has not been implemented!", instruction.to_string());
-    true
+    state.pc
 }

@@ -21,7 +21,7 @@ pub fn print_instructions(instructions: Vec<Instruction>){
 
     for i in instructions {
         println!("{:04x} {}", counter, i.to_string());
-        counter += i.num_of_bytes();
+        counter += i.size();
     }
 }
 
@@ -34,7 +34,7 @@ pub fn write_instructions_to_file(instructions: Vec<Instruction>, filename: &str
     for i in instructions {
         let line = format!("{:04x} {}\n", counter, i.to_string());
         file.write_all(line.as_bytes())?;
-        counter += i.num_of_bytes();
+        counter += i.size();
     }
 
     Ok(())

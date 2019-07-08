@@ -35,20 +35,12 @@ impl Instruction{
         instruction
     }
 
-    pub fn get_addr(&self) -> u16 {
-        match self.operands.as_slice() {
-            [first, second] => ((*first as u16) << 8) | *second as u16,
-            [first] => *first as u16,
-            _ => 0 as u16
-        }
-    }
-
-    pub fn num_of_bytes(&self) -> usize {
+    pub fn size(&self) -> usize {
         self.operands.len() + 1
     }
 
-    pub fn execute(&self, state: &mut State) -> bool {
-        processing_unit::determine_processing_unit(&self.opcode)(state, self)
+    pub fn execute(&self, state: &mut State) -> usize {
+        processing_unit::process_instruction(&self.opcode)(state, self)
     }
 }
 

@@ -33,12 +33,14 @@ impl CpuContext {
 
     pub fn run(&mut self){
         let mem_end = self.state.memory.len();
-        let mut program_exit: bool = false;
+        let mut next_addr = self.state.pc;
+        self.state.pc = next_addr + 1;
 
-        while self.state.pc < mem_end && !program_exit {
+        while self.state.pc < mem_end && next_addr != self.state.pc {
+            self.state.pc = next_addr;
             let instr = instruction_set::read_next(&self.state.memory, self.state.pc);
             //self.state.debug(instr.to_string());
-            program_exit = instr.execute(&mut self.state);
+            next_addr = instr.execute(&mut self.state);
         }
     }
 }

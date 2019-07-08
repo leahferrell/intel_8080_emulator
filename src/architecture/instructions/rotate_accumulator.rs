@@ -5,22 +5,22 @@ use crate::architecture::model::instruction::Instruction;
 ///
 /// Instructions which rotate the contents of the accumulator.
 
-pub fn rotate_left(state: &mut State, instruction: &Instruction) -> bool {
+pub fn rotate_left(state: &mut State, instruction: &Instruction) -> usize {
     println!("ERROR: {} has not been implemented!", instruction.to_string());
-    true
+    state.pc
 }
 
-pub fn rotate_right(state: &mut State, instruction: &Instruction) -> bool {
+pub fn rotate_right(state: &mut State, instruction: &Instruction) -> usize {
     println!("ERROR: {} has not been implemented!", instruction.to_string());
-    true
+    state.pc
 }
 
-pub fn rotate_left_through_carry(state: &mut State, instruction: &Instruction) -> bool {
+pub fn rotate_left_through_carry(state: &mut State, instruction: &Instruction) -> usize {
     println!("ERROR: {} has not been implemented!", instruction.to_string());
-    true
+    state.pc
 }
 
-pub fn rotate_right_through_carry(state: &mut State, instruction: &Instruction) -> bool {
+pub fn rotate_right_through_carry(state: &mut State, instruction: &Instruction) -> usize {
     println!("ERROR: {} has not been implemented!", instruction.to_string());
-    true
+    state.pc
 }

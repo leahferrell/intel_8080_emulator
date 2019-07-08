@@ -5,7 +5,7 @@ use crate::architecture::model::instruction::Instruction;
 ///
 /// The restart instruction is a special purpose subroutine jump.
 
-pub fn restart(state: &mut State, instruction: &Instruction) -> bool {
+pub fn restart(state: &mut State, instruction: &Instruction) -> usize {
     println!("ERROR: {} has not been implemented!", instruction.to_string());
-    true
+    state.pc
 }

@@ -56,7 +56,7 @@ mod tests {
 
     #[test]
     fn test_push() {
-        let mut state = &mut State{pc:0x2000,sp:0x1002,memory:vec![0;10000],..Default::default()};
+        let state = &mut State{pc:0x2000,sp:0x1002,memory:vec![0;10000],..Default::default()};
         let ret:u16 = (state.pc + 3) as u16;
         push_return_addr(state, ret);
         assert_eq!(state.pc, 0x2000);
@@ -67,7 +67,7 @@ mod tests {
 
     #[test]
     fn test_pop() {
-        let mut state = &mut State{pc:0x2000,sp:0x1002,memory:vec![0;10000],..Default::default()};
+        let state = &mut State{pc:0x2000,sp:0x1002,memory:vec![0;10000],..Default::default()};
         let ret:u16 = (state.pc + 3) as u16;
         push_return_addr(state, ret);
         let popped_ret = pop_return_addr(state);

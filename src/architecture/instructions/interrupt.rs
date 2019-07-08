@@ -6,12 +6,12 @@ use crate::architecture::model::instruction::Instruction;
 /// Instructions which operate directly upon the Interrupt Enable
 /// flip-flop INTE.
 
-pub fn enable(state: &mut State, instruction: &Instruction) -> bool {
+pub fn enable(state: &mut State, instruction: &Instruction) -> usize {
     println!("ERROR: {} has not been implemented!", instruction.to_string());
-    true
+    state.pc
 }
 
-pub fn disable(state: &mut State, instruction: &Instruction) -> bool {
+pub fn disable(state: &mut State, instruction: &Instruction) -> usize {
     println!("ERROR: {} has not been implemented!", instruction.to_string());
-    true
+    state.pc
 }

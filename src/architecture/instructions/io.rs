@@ -7,17 +7,15 @@ use crate::architecture::model::registers::Register;
 ///
 /// Instructions which cause data to be input to or output from the 8080.
 
-pub fn input(state: &mut State, instruction: &Instruction) -> bool {
+pub fn input(state: &mut State, instruction: &Instruction) -> usize {
     println!("ERROR: {} has not been implemented!", instruction.to_string());
-    true
+    state.pc
 }
 
-pub fn output(state: &mut State, instruction: &Instruction) -> bool {
+pub fn output(state: &mut State, instruction: &Instruction) -> usize {
     let value = memory_unit::get_reg_value(state, &Register::A);
 
     println!("outputting the following data: {:02x}", value);
 
-    state.pc += instruction.num_of_bytes();
-
-    false
+    state.pc + instruction.size()
 }

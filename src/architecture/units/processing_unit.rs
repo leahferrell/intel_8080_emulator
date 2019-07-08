@@ -5,7 +5,7 @@ use crate::architecture::model::state::State;
 use crate::architecture::units::control_unit;
 use crate::architecture::model::opcodes::OpCode::*;
 
-pub fn determine_processing_unit(opcode: &OpCode) -> fn(&mut State, &Instruction) -> bool {
+pub fn process_instruction(opcode: &OpCode) -> fn(&mut State, &Instruction) -> usize {
     match opcode {
         NOP => nop::no_operation,
         LXI => immediate::load_register_pair,
