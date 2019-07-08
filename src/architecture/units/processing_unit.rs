@@ -1,11 +1,10 @@
 use crate::architecture::instructions::*;
-use crate::architecture::model::instruction::Instruction;
 use crate::architecture::model::opcodes::OpCode;
-use crate::architecture::model::state::State;
 use crate::architecture::units::control_unit;
 use crate::architecture::model::opcodes::OpCode::*;
+use crate::architecture::ExecutionStep;
 
-pub fn process_instruction(opcode: &OpCode) -> fn(&mut State, &Instruction) -> usize {
+pub fn process_instruction(opcode: &OpCode) -> ExecutionStep {
     match opcode {
         NOP => nop::no_operation,
         LXI => immediate::load_register_pair,

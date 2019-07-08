@@ -3,18 +3,19 @@ use crate::architecture::model::instruction::Instruction;
 use crate::architecture::units::memory_unit;
 use crate::architecture::model::registers::Register;
 use crate::architecture::units::arithmetic_logic_unit;
+use crate::architecture::AddressPtr;
 
 /// # Immediate Instructions:
 ///
 /// Instructions which perform operations using a byte or bytes of data
 /// which are part of the instruction itself.
 
-pub fn load_register_pair(state: &mut State, instruction: &Instruction) -> usize {
+pub fn load_register_pair(state: &mut State, instruction: &Instruction) -> AddressPtr {
     memory_unit::set_mem_loc_in_reg(state, &instruction.register[0], &instruction.operands);
     state.pc + instruction.size()
 }
 
-pub fn move_data(state: &mut State, instruction: &Instruction) -> usize {
+pub fn move_data(state: &mut State, instruction: &Instruction) -> AddressPtr {
     let reg = &instruction.register[0];
     let data = instruction.operands[0];
 
@@ -22,42 +23,42 @@ pub fn move_data(state: &mut State, instruction: &Instruction) -> usize {
     state.pc + instruction.size()
 }
 
-pub fn add(state: &mut State, instruction: &Instruction) -> usize {
+pub fn add(state: &mut State, instruction: &Instruction) -> AddressPtr {
     println!("ERROR: {} has not been implemented!", instruction.to_string());
     state.pc
 }
 
-pub fn add_with_carry(state: &mut State, instruction: &Instruction) -> usize {
+pub fn add_with_carry(state: &mut State, instruction: &Instruction) -> AddressPtr {
     println!("ERROR: {} has not been implemented!", instruction.to_string());
     state.pc
 }
 
-pub fn sub(state: &mut State, instruction: &Instruction) -> usize {
+pub fn sub(state: &mut State, instruction: &Instruction) -> AddressPtr {
     println!("ERROR: {} has not been implemented!", instruction.to_string());
     state.pc
 }
 
-pub fn sub_with_borrow(state: &mut State, instruction: &Instruction) -> usize {
+pub fn sub_with_borrow(state: &mut State, instruction: &Instruction) -> AddressPtr {
     println!("ERROR: {} has not been implemented!", instruction.to_string());
     state.pc
 }
 
-pub fn and(state: &mut State, instruction: &Instruction) -> usize {
+pub fn and(state: &mut State, instruction: &Instruction) -> AddressPtr {
     println!("ERROR: {} has not been implemented!", instruction.to_string());
     state.pc
 }
 
-pub fn xor(state: &mut State, instruction: &Instruction) -> usize {
+pub fn xor(state: &mut State, instruction: &Instruction) -> AddressPtr {
     println!("ERROR: {} has not been implemented!", instruction.to_string());
     state.pc
 }
 
-pub fn or(state: &mut State, instruction: &Instruction) -> usize {
+pub fn or(state: &mut State, instruction: &Instruction) -> AddressPtr {
     println!("ERROR: {} has not been implemented!", instruction.to_string());
     state.pc
 }
 
-pub fn compare(state: &mut State, instruction: &Instruction) -> usize {
+pub fn compare(state: &mut State, instruction: &Instruction) -> AddressPtr {
     let acc = memory_unit::get_reg_value(state, &Register::A);
     let imm = instruction.operands[0];
 

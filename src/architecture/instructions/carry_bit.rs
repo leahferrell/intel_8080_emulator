@@ -1,16 +1,17 @@
 use crate::architecture::model::state::State;
 use crate::architecture::model::instruction::Instruction;
+use crate::architecture::AddressPtr;
 
 /// # Carry Bit Instructions:
 ///
 /// Instructions which operate directly on the carry bit.
 
-pub fn complement(state: &mut State, instruction: &Instruction)-> usize {
+pub fn complement(state: &mut State, instruction: &Instruction) -> AddressPtr {
     state.cc.cy = !state.cc.cy;
     state.pc + instruction.size()
 }
 
-pub fn set(state: &mut State, instruction: &Instruction)-> usize {
+pub fn set(state: &mut State, instruction: &Instruction) -> AddressPtr {
     state.cc.cy = true;
     state.pc + instruction.size()
 }

@@ -1,4 +1,6 @@
 use crate::architecture::model::condition_codes::ConditionCodes;
+use crate::architecture::ExecutionStep;
+use crate::architecture::AddressPtr;
 
 #[derive(Default)]
 pub struct State {
@@ -9,11 +11,14 @@ pub struct State {
     pub e: u8,
     pub h: u8,
     pub l: u8,
-    pub pc: usize,
-    pub sp: usize,
+    pub pc: AddressPtr,
+    pub sp: AddressPtr,
     pub memory: Vec<u8>,
     pub cc: ConditionCodes,
-    pub int_enable: u8
+    pub int_enable: bool,
+    pub input_queue: Vec<u8>,
+    pub output_queue: Vec<u8>,
+    pub instruction_queue: Vec<ExecutionStep>
 }
 
 impl State {

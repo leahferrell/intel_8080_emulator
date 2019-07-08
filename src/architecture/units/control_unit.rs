@@ -2,8 +2,9 @@ use crate::architecture::model::state::State;
 use crate::architecture::model::instruction::Instruction;
 use crate::architecture::units::stack;
 use crate::architecture::units::arithmetic_logic_unit;
+use crate::architecture::AddressPtr;
 
-pub fn default(state: &mut State, instruction: &Instruction) -> usize {
+pub fn default(state: &mut State, instruction: &Instruction) -> AddressPtr {
 
     match instruction.opcode.to_string().chars().next() {
         Some('C') => {
@@ -24,7 +25,7 @@ pub fn default(state: &mut State, instruction: &Instruction) -> usize {
     }
 }
 
-fn condition(state: &mut State, instruction: &Instruction, expected_condition: bool) -> usize {
+fn condition(state: &mut State, instruction: &Instruction, expected_condition: bool) -> AddressPtr {
     if expected_condition {
         default(state, instruction)
     }else{
@@ -32,39 +33,39 @@ fn condition(state: &mut State, instruction: &Instruction, expected_condition: b
     }
 }
 
-pub fn carry(state: &mut State, instruction: &Instruction) -> usize {
+pub fn carry(state: &mut State, instruction: &Instruction) -> AddressPtr {
     condition(state, instruction, state.cc.cy)
 }
 
-pub fn no_carry(state: &mut State, instruction: &Instruction) -> usize {
+pub fn no_carry(state: &mut State, instruction: &Instruction) -> AddressPtr {
     condition(state, instruction, !state.cc.cy)
 }
 
-pub fn zero(state: &mut State, instruction: &Instruction) -> usize {
+pub fn zero(state: &mut State, instruction: &Instruction) -> AddressPtr {
     condition(state, instruction, state.cc.z)
 }
 
-pub fn no_zero(state: &mut State, instruction: &Instruction) -> usize {
+pub fn no_zero(state: &mut State, instruction: &Instruction) -> AddressPtr {
     condition(state, instruction, !state.cc.z)
 }
 
-pub fn minus(state: &mut State, instruction: &Instruction) -> usize {
+pub fn minus(state: &mut State, instruction: &Instruction) -> AddressPtr {
     condition(state, instruction, state.cc.s)
 }
 
-pub fn positive(state: &mut State, instruction: &Instruction) -> usize {
+pub fn positive(state: &mut State, instruction: &Instruction) -> AddressPtr {
     condition(state, instruction, !state.cc.s)
 }
 
-pub fn parity_even(state: &mut State, instruction: &Instruction) -> usize {
+pub fn parity_even(state: &mut State, instruction: &Instruction) -> AddressPtr {
     condition(state, instruction, state.cc.p)
 }
 
-pub fn parity_odd(state: &mut State, instruction: &Instruction) -> usize {
+pub fn parity_odd(state: &mut State, instruction: &Instruction) -> AddressPtr {
     condition(state, instruction, !state.cc.p)
 }
 
-pub fn load_pc(state: &mut State, instruction: &Instruction) -> usize {
+pub fn load_pc(state: &mut State, instruction: &Instruction) -> AddressPtr {
     println!("ERROR: {} has not been implemented!", instruction.to_string());
     state.pc
 }
