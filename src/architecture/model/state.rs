@@ -1,23 +1,25 @@
 use crate::architecture::model::condition_codes::ConditionCodes;
 use crate::architecture::ExecutionStep;
 use crate::architecture::AddressPtr;
+use crate::architecture::OutputSignal;
 
 #[derive(Default)]
 pub struct State {
-    pub a: u8,
-    pub b: u8,
-    pub c: u8,
-    pub d: u8,
-    pub e: u8,
-    pub h: u8,
-    pub l: u8,
-    pub pc: AddressPtr,
-    pub sp: AddressPtr,
+    pub a: u8,                                 // accumulator
+    pub b: u8,                                 // reg b
+    pub c: u8,                                 // reg c
+    pub d: u8,                                 // reg d
+    pub e: u8,                                 // reg e
+    pub h: u8,                                 // reg h
+    pub l: u8,                                 // reg l
+    pub pc: AddressPtr,                        // program counter
+    pub sp: AddressPtr,                        // stack pointer
+    pub nc: AddressPtr,                        // next counter
     pub memory: Vec<u8>,
     pub cc: ConditionCodes,
-    pub int_enable: bool,
-    pub input_queue: Vec<u8>,
-    pub output_queue: Vec<u8>,
+    pub int_enable: bool,                      // interrupt enabled / disabled
+    pub input_queue: Vec<u8>,                  // signals sent from input devices
+    pub output_queue: Vec<OutputSignal>,       // signals set to output devices
     pub instruction_queue: Vec<ExecutionStep>
 }
 

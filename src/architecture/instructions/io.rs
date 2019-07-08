@@ -3,6 +3,7 @@ use crate::architecture::model::instruction::Instruction;
 use crate::architecture::units::memory_unit;
 use crate::architecture::model::registers::Register;
 use crate::architecture::AddressPtr;
+use crate::architecture::OutputSignal;
 
 /// # Input/Output Instructions:
 ///
@@ -14,9 +15,9 @@ pub fn input(state: &mut State, instruction: &Instruction) -> AddressPtr {
 }
 
 pub fn output(state: &mut State, instruction: &Instruction) -> AddressPtr {
-    let value = memory_unit::get_reg_value(state, &Register::A);
+    let signal = memory_unit::get_reg_value(state, &Register::A);
+    let device = instruction.operands[0];
 
-    println!("outputting the following data: {:02x}", value);
-
+    state.output_queue.push(OutputSignal{signal, device});
     state.pc + instruction.size()
 }
