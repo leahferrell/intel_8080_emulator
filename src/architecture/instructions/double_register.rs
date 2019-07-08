@@ -1,6 +1,7 @@
 use crate::architecture::state::State;
 use crate::architecture::instruction::Instruction;
 use crate::architecture::registers::Register;
+use crate::architecture::units::stack;
 
 
 /// # Register Pair Instructions:
@@ -8,13 +9,15 @@ use crate::architecture::registers::Register;
 /// Instructions which operate on pairs of registers
 
 pub fn push(state: &mut State, instruction: &Instruction) -> bool {
-    println!("ERROR: {} has not been implemented!", instruction.to_string());
-    true
+    stack::push_reg(state, &instruction.register[0]);
+    state.pc += instruction.num_of_bytes();
+    false
 }
 
 pub fn pop(state: &mut State, instruction: &Instruction) -> bool {
-    println!("ERROR: {} has not been implemented!", instruction.to_string());
-    true
+    stack::pop_to_reg(state, &instruction.register[0]);
+    state.pc += instruction.num_of_bytes();
+    false
 }
 
 pub fn double_add(state: &mut State, instruction: &Instruction) -> bool {

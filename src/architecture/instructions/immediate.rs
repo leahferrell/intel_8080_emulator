@@ -2,6 +2,7 @@ use crate::architecture::state::State;
 use crate::architecture::instruction::Instruction;
 use crate::architecture::registers::Register;
 use crate::architecture::units::memory_unit;
+use crate::architecture::units::arithmetic_logic_unit;
 
 
 /// # Immediate Instructions:
@@ -64,6 +65,18 @@ pub fn or(state: &mut State, instruction: &Instruction) -> bool {
 }
 
 pub fn compare(state: &mut State, instruction: &Instruction) -> bool {
-    println!("ERROR: {} has not been implemented!", instruction.to_string());
-    true
+    let acc = memory_unit::get_reg_value(state, &Register::A);
+    let imm = instruction.operands[0];
+
+    let result = arithmetic_logic_unit::compare(acc, imm);
+
+    state.cc.cy = result.1.cy;
+    state.cc.s = result.1.s;
+    state.cc.z = result.1.z;
+    state.cc.p = result.1.p;
+    state.cc.ac = result.1.ac;
+
+    state.pc += instruction.num_of_bytes();
+
+    false
 }

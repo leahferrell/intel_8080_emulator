@@ -10,9 +10,9 @@ use crate::architecture::units::memory_unit;
 /// memory and registers.
 
 pub fn move_reg(state: &mut State, instruction: &Instruction) -> bool {
-    let value = memory_unit::get_reg_value(state, &instruction.register[0]);
+    let value = memory_unit::get_reg_value(state, &instruction.register[1]);
 
-    memory_unit::set_reg_value(state, &instruction.register[1], value);
+    memory_unit::set_reg_value(state, &instruction.register[0], value);
 
     state.pc += instruction.num_of_bytes();
     false

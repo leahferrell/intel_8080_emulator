@@ -21,6 +21,10 @@ pub fn sub(num1: u8, num2: u8) -> (u8, ConditionCodes) {
     result
 }
 
+pub fn compare(num1: u8, num2: u8) -> (u8, ConditionCodes) {
+    sub(num1, num2)
+}
+
 pub fn ones_complement(num: u8) -> u8 {
     num ^ 0xff
 }
@@ -132,5 +136,12 @@ mod tests {
         let result = sub(0x3e, 0x3e);
         assert_eq!(result.0, 0);
         assert_eq!(result.1, ConditionCodes{z: true,s: false,p: true,cy: false,ac: false,pad: 0});
+    }
+
+    #[test]
+    fn test_compare_with_example_in_manual() {
+        let result = compare(0x4a, 0x40);
+        assert_eq!(result.0, 0x0a);
+        assert_eq!(result.1, ConditionCodes{z: false,s: false,p: true,cy: false,ac: false,pad: 0});
     }
 }
