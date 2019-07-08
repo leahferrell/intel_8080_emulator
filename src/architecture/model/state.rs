@@ -19,7 +19,7 @@ pub struct State {
     pub cc: ConditionCodes,
     pub int_enable: bool,                      // interrupt enabled / disabled
     pub input_queue: Vec<u8>,                  // signals sent from input devices
-    pub output_queue: Vec<OutputSignal>,       // signals set to output devices
+    pub output_queue: Vec<OutputSignal>,       // signals sent to output devices
     pub instruction_queue: Vec<ExecutionStep>
 }
 
