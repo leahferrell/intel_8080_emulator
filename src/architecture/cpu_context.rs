@@ -59,7 +59,7 @@ impl CpuContext {
 
         // 3. Execute any output queue instructions
         match self.state.output_queue.pop() {
-            Some(os) => (io_unit::get_handler(os.device).handle(&mut self.state, os)),
+            Some(os) => (io_unit::get_output_handler(os.device).handle(&mut self.state, os)),
             None => ()
         }
     }

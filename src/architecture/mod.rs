@@ -4,7 +4,7 @@ use crate::architecture::model::instruction::Instruction;
 type AddressPtr = usize;
 type ExecutionStep = fn(&mut State, &Instruction) -> AddressPtr;
 
-pub struct OutputSignal {
+pub struct IoSignal {
     device: u8,
     signal: u8
 }

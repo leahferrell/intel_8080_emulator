@@ -1,7 +1,7 @@
 use crate::architecture::model::condition_codes::ConditionCodes;
 use crate::architecture::ExecutionStep;
 use crate::architecture::AddressPtr;
-use crate::architecture::OutputSignal;
+use crate::architecture::IoSignal;
 
 #[derive(Default)]
 pub struct State {
@@ -20,7 +20,7 @@ pub struct State {
     pub int_enable: bool,                      // interrupt enabled / disabled
     pub stopped: bool,                         // if true, no further activity occurs until an interrupt
     pub input_queue: Vec<u8>,                  // signals sent from input devices
-    pub output_queue: Vec<OutputSignal>,       // signals sent to output devices
+    pub output_queue: Vec<IoSignal>,       // signals sent to output devices
     pub instruction_queue: Vec<ExecutionStep>
 }
 
