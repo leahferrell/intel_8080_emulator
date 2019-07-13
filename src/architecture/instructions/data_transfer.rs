@@ -36,7 +36,6 @@ pub fn store_accumulator(state: &mut State, instruction: &Instruction) -> Addres
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::architecture::model::condition_codes::ConditionCodes;
     use crate::architecture::model::opcodes::OpCode;
 
     #[test]
