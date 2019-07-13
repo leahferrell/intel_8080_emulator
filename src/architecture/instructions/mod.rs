@@ -1,5 +1,4 @@
 pub mod carry_bit;
-pub mod data;
 pub mod data_transfer;
 pub mod direct_addressing;
 pub mod register_pair;
