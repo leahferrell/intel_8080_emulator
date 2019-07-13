@@ -47,6 +47,13 @@ pub fn sub(num1: u8, num2: u8) -> (u8, ConditionCodes) {
     result
 }
 
+pub fn double_sub(num1: (u8,u8), num2:(u8,u8)) -> ((u8,u8), ConditionCodes) {
+    let mut result = double_add(num1, twos_complement_16(num2));
+    result.1.cy = !result.1.cy;
+
+    result
+}
+
 pub fn compare(num1: u8, num2: u8) -> (u8, ConditionCodes) {
     sub(num1, num2)
 }
@@ -57,6 +64,14 @@ pub fn ones_complement(num: u8) -> u8 {
 
 pub fn twos_complement(num: u8) -> u8 {
     add(ones_complement(num), 1).0
+}
+
+pub fn ones_complement_16(num: (u8,u8)) -> (u8,u8) {
+    (num.0 ^ 0xff, num.1 ^ 0xff)
+}
+
+pub fn twos_complement_16(num: (u8,u8)) -> (u8,u8) {
+    double_add(ones_complement_16(num), (0,1)).0
 }
 
 pub fn compute_parity(x: u8) -> bool {
@@ -70,6 +85,39 @@ pub fn compute_parity_u16(num: (u8,u8)) -> bool {
     let num1 = compute_parity(num.0);
     let num2 = compute_parity(num.1);
     !(num1 ^ num2)
+}
+
+pub fn and(num1: u8, num2: u8) -> (u8, ConditionCodes) {
+    let mut conditions = ConditionCodes{..Default::default()};
+    let result = num1 & num2;
+    conditions.cy = false;
+    conditions.z = result == 0;
+    conditions.p = compute_parity(result);
+    conditions.s = result > 127;
+
+    (result, conditions)
+}
+
+pub fn xor(num1: u8, num2: u8) -> (u8, ConditionCodes) {
+    let mut conditions = ConditionCodes{..Default::default()};
+    let result = num1 ^ num2;
+    conditions.cy = false;
+    conditions.z = result == 0;
+    conditions.p = compute_parity(result);
+    conditions.s = result > 127;
+
+    (result, conditions)
+}
+
+pub fn or(num1: u8, num2: u8) -> (u8, ConditionCodes) {
+    let mut conditions = ConditionCodes{..Default::default()};
+    let result = num1 | num2;
+    conditions.cy = false;
+    conditions.z = result == 0;
+    conditions.p = compute_parity(result);
+    conditions.s = result > 127;
+
+    (result, conditions)
 }
 
 #[cfg(test)]

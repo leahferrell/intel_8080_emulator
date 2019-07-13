@@ -10,16 +10,19 @@ use crate::architecture::AddressPtr;
 ///
 /// Instructions which operate on pairs of registers
 
+//TODO: unit tests
 pub fn push(state: &mut State, instruction: &Instruction) -> AddressPtr {
     stack::push_reg(state, &instruction.register[0]);
     state.pc + instruction.size()
 }
 
+//TODO: unit tests
 pub fn pop(state: &mut State, instruction: &Instruction) -> AddressPtr {
     stack::pop_to_reg(state, &instruction.register[0]);
     state.pc + instruction.size()
 }
 
+//TODO: unit tests
 pub fn double_add(state: &mut State, instruction: &Instruction) -> AddressPtr {
     let reg_pair_val = memory_unit::get_double_reg_value(state, &instruction.register[0]);
     let hl_pair_val = memory_unit::get_double_reg_value(state, &Register::H);
@@ -32,6 +35,7 @@ pub fn double_add(state: &mut State, instruction: &Instruction) -> AddressPtr {
     state.pc + instruction.size()
 }
 
+//TODO: unit tests
 pub fn increment(state: &mut State, instruction: &Instruction) -> AddressPtr {
     let reg = &instruction.register[0];
 
@@ -41,11 +45,17 @@ pub fn increment(state: &mut State, instruction: &Instruction) -> AddressPtr {
     state.pc + instruction.size()
 }
 
+//TODO: unit tests
 pub fn decrement(state: &mut State, instruction: &Instruction) -> AddressPtr {
-    println!("ERROR: {} has not been implemented!", instruction.to_string());
-    state.pc
+    let reg = &instruction.register[0];
+
+    let reg_pair = memory_unit::get_double_reg_value(state, reg);
+    let result = arithmetic_logic_unit::double_sub(reg_pair, (0,1));
+    memory_unit::set_double_reg_value(state, reg, result.0);
+    state.pc + instruction.size()
 }
 
+//TODO: unit tests
 pub fn exchange(state: &mut State, instruction: &Instruction) -> AddressPtr {
     let hl_pair_val = memory_unit::get_double_reg_value(state, &Register::H);
     let de_pair_val = memory_unit::get_double_reg_value(state, &Register::D);
@@ -56,6 +66,7 @@ pub fn exchange(state: &mut State, instruction: &Instruction) -> AddressPtr {
     state.pc + instruction.size()
 }
 
+//TODO: unit tests
 pub fn exchange_sp(state: &mut State, instruction: &Instruction) -> AddressPtr {
     let sp1_loc = memory_unit::get_double_reg_value(state, &Register::SP);
     let sp2_loc = arithmetic_logic_unit::double_add(sp1_loc, (0,1)).0;
@@ -72,6 +83,7 @@ pub fn exchange_sp(state: &mut State, instruction: &Instruction) -> AddressPtr {
     state.pc + instruction.size()
 }
 
+//TODO: unit tests
 pub fn load_sp_from_hl(state: &mut State, instruction: &Instruction) -> AddressPtr {
     let hl_pair_val = memory_unit::get_double_reg_value(state, &Register::H);
     memory_unit::set_double_reg_value(state, &Register::SP, hl_pair_val);
