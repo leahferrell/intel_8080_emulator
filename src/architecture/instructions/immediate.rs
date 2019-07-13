@@ -40,7 +40,7 @@ pub fn add(state: &mut State, instruction: &Instruction) -> AddressPtr {
     state.pc + instruction.size()
 }
 
-//TODO: verify logic on condition codes is correct
+//TODO: unit tests and verify logic on condition codes is correct
 pub fn add_with_carry(state: &mut State, instruction: &Instruction) -> AddressPtr {
     let acc_value = state.a;
     let imm_value = instruction.operands[0];
