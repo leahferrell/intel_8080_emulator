@@ -2,7 +2,7 @@ pub mod carry_bit;
 pub mod data;
 pub mod data_transfer;
 pub mod direct_addressing;
-pub mod double_register;
+pub mod register_pair;
 pub mod hlt;
 pub mod immediate;
 pub mod interrupt;

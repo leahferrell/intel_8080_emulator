@@ -18,6 +18,7 @@ pub struct State {
     pub memory: Vec<u8>,
     pub cc: ConditionCodes,
     pub int_enable: bool,                      // interrupt enabled / disabled
+    pub stopped: bool,                         // if true, no further activity occurs until an interrupt
     pub input_queue: Vec<u8>,                  // signals sent from input devices
     pub output_queue: Vec<OutputSignal>,       // signals sent to output devices
     pub instruction_queue: Vec<ExecutionStep>

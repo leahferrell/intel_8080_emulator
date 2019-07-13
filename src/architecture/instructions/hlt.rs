@@ -8,6 +8,21 @@ use crate::architecture::AddressPtr;
 /// flip-flop INTE.
 
 pub fn halt(state: &mut State, instruction: &Instruction) -> AddressPtr {
-    println!("ERROR: {} has not been implemented!", instruction.to_string());
-    state.pc
+    state.stopped = true;
+    state.pc + instruction.size()
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::architecture::model::opcodes::OpCode;
+
+    #[test]
+    fn test_halt() {
+        let mut state = State {..Default::default()};
+        let instruction = &Instruction{opcode:OpCode::HLT,..Default::default()};
+        let result = halt(&mut state, instruction);
+        assert_eq!(result, 1);
+        assert_eq!(state.stopped, true);
+    }
 }
