@@ -1,5 +1,5 @@
-use crate::architecture::model::state::State;
-use crate::architecture::model::instruction::Instruction;
+use crate::architecture::models::state::State;
+use crate::architecture::models::instruction::Instruction;
 use crate::architecture::AddressPtr;
 use crate::architecture::units::stack;
 

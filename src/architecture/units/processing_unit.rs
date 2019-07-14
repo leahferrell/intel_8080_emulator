@@ -1,7 +1,7 @@
 use crate::architecture::instructions::*;
-use crate::architecture::model::opcodes::OpCode;
+use crate::architecture::models::opcodes::OpCode;
 use crate::architecture::units::control_unit;
-use crate::architecture::model::opcodes::OpCode::*;
+use crate::architecture::models::opcodes::OpCode::*;
 use crate::architecture::ExecutionStep;
 
 pub fn process_instruction(opcode: &OpCode) -> ExecutionStep {

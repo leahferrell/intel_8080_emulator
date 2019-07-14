@@ -1,4 +1,4 @@
-use crate::architecture::model::instruction::Instruction;
+use crate::architecture::models::instruction::Instruction;
 use crate::architecture::instruction_set;
 
 pub fn convert_to_assembly(buf: Vec<u8>) -> Vec<Instruction> {

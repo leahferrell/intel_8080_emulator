@@ -1,4 +1,4 @@
-use crate::architecture::model::condition_codes::ConditionCodes;
+use crate::architecture::models::condition_codes::ConditionCodes;
 use crate::architecture::ExecutionStep;
 use crate::architecture::AddressPtr;
 use crate::architecture::IoSignal;

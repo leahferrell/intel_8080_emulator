@@ -1,4 +1,4 @@
-use crate::architecture::model::condition_codes::ConditionCodes;
+use crate::architecture::models::condition_codes::ConditionCodes;
 
 pub fn add(num1: u8, num2:u8) -> (u8, ConditionCodes) {
     let mut conditions = ConditionCodes{..Default::default()};

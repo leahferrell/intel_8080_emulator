@@ -1,6 +1,6 @@
 use crate::architecture::instruction_set;
-use crate::architecture::model::condition_codes::ConditionCodes;
-use crate::architecture::model::state::State;
+use crate::architecture::models::condition_codes::ConditionCodes;
+use crate::architecture::models::state::State;
 use crate::disassembler::parser;
 use crate::architecture::units::io_unit;
 use std::sync::mpsc::Receiver;

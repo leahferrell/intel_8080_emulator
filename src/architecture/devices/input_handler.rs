@@ -1,4 +1,4 @@
-use crate::architecture::model::state::State;
+use crate::architecture::models::state::State;
 use crate::architecture::IoSignal;
 
 pub trait InputHandler {

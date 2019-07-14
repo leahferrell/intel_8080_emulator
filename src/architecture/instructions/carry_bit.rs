@@ -1,5 +1,5 @@
-use crate::architecture::model::state::State;
-use crate::architecture::model::instruction::Instruction;
+use crate::architecture::models::state::State;
+use crate::architecture::models::instruction::Instruction;
 use crate::architecture::AddressPtr;
 
 /// # Carry Bit Instructions:
@@ -20,8 +20,8 @@ pub fn set(state: &mut State, instruction: &Instruction) -> AddressPtr {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::architecture::model::condition_codes::ConditionCodes;
-    use crate::architecture::model::opcodes::OpCode;
+    use crate::architecture::models::condition_codes::ConditionCodes;
+    use crate::architecture::models::opcodes::OpCode;
 
     #[test]
     fn test_complement() {

@@ -1,7 +1,7 @@
-use crate::architecture::model::state::State;
+use crate::architecture::models::state::State;
 use crate::architecture::units::memory_unit;
-use crate::architecture::model::instruction::Instruction;
-use crate::architecture::model::registers::Register;
+use crate::architecture::models::instruction::Instruction;
+use crate::architecture::models::registers::Register;
 use crate::architecture::AddressPtr;
 
 /// # Data Instructions:
@@ -36,7 +36,7 @@ pub fn store_accumulator(state: &mut State, instruction: &Instruction) -> Addres
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::architecture::model::opcodes::OpCode;
+    use crate::architecture::models::opcodes::OpCode;
 
     #[test]
     fn test_move_reg_to_reg() {
