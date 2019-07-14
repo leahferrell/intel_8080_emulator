@@ -1,6 +1,7 @@
 use piston::input::GenericEvent;
 
 use crate::ui::models::screen::Screen;
+use crate::architecture::cpu_context::CpuContext;
 
 pub struct ArcadeController {
     pub screen: Screen,
