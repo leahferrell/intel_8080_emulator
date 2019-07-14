@@ -11,3 +11,7 @@ path = "./src/lib.rs"
 [dependencies]
 strum = "0.15.0"
 strum_macros = "0.15.0"
+piston = "*"
+piston2d-graphics = "*"
+piston2d-opengl_graphics = "*"
+pistoncore-glutin_window = "*"
