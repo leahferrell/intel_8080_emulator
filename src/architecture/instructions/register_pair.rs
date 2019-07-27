@@ -1,9 +1,9 @@
-use crate::architecture::model::state::State;
-use crate::architecture::model::instruction::Instruction;
+use crate::architecture::models::state::State;
+use crate::architecture::models::instruction::Instruction;
 use crate::architecture::units::stack;
 use crate::architecture::units::memory_unit;
 use crate::architecture::units::arithmetic_logic_unit;
-use crate::architecture::model::registers::Register;
+use crate::architecture::models::registers::Register;
 use crate::architecture::AddressPtr;
 
 /// # Register Pair Instructions:

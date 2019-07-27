@@ -1,5 +1,5 @@
-use crate::architecture::model::state::State;
-use crate::architecture::model::instruction::Instruction;
+use crate::architecture::models::state::State;
+use crate::architecture::models::instruction::Instruction;
 
 type AddressPtr = usize;
 type ExecutionStep = fn(&mut State, &Instruction) -> AddressPtr;
@@ -14,4 +14,4 @@ pub mod instructions;
 pub mod units;
 pub mod cpu_context;
 pub mod devices;
-pub mod model;
+pub mod models;

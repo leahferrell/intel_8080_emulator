@@ -1,9 +1,9 @@
 extern crate strum;
 extern crate strum_macros;
 
-use crate::architecture::model::opcodes::OpCode;
-use crate::architecture::model::registers::Register;
-use crate::architecture::model::state::State;
+use crate::architecture::models::opcodes::OpCode;
+use crate::architecture::models::registers::Register;
+use crate::architecture::models::state::State;
 use crate::architecture::units::processing_unit;
 
 

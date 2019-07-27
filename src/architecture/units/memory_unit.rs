@@ -1,5 +1,5 @@
-use crate::architecture::model::state::State;
-use crate::architecture::model::registers::Register;
+use crate::architecture::models::state::State;
+use crate::architecture::models::registers::Register;
 use crate::architecture::units::arithmetic_logic_unit;
 
 pub fn get_reg_value(state: &State, reg: &Register) -> u8 {

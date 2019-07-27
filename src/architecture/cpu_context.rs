@@ -1,16 +1,19 @@
 use crate::architecture::instruction_set;
-use crate::architecture::model::condition_codes::ConditionCodes;
-use crate::architecture::model::state::State;
+use crate::architecture::models::condition_codes::ConditionCodes;
+use crate::architecture::models::state::State;
 use crate::disassembler::parser;
 use crate::architecture::units::io_unit;
+use std::sync::mpsc::Receiver;
+use crate::actor::cpu_actor::CpuActor;
 
 pub struct CpuContext {
-    pub state: State
+    pub state: State,
+    pub cpu_actor: CpuActor,
 }
 
 impl CpuContext {
 
-    pub fn load_program(program: &str, mem_size: usize) -> CpuContext {
+    pub fn load_program(program: &str, mem_size: usize, cpu_actor: CpuActor) -> CpuContext {
         let program_in_bytes = parser::parse(program, mem_size).unwrap();
 
         let state = State{
@@ -22,22 +25,29 @@ impl CpuContext {
                 cy: true,
                 ac: true
             },
+            stopped: true,
             ..Default::default()
         };
 
         println!("Set memory to: {}", state.memory.capacity());
 
         CpuContext{
-            state
+            state,
+            cpu_actor
         }
     }
 
     pub fn run(&mut self){
         self.state.nc = self.state.pc;
         self.state.pc = self.state.nc + 1;
+        let mut recv_exit_code = false;
 
-        while self.still_running() {
-            self.cycle()
+        while self.still_running() && !recv_exit_code {
+            recv_exit_code = self.cpu_actor.should_exit();
+
+            if !self.state.stopped {
+                self.cycle();
+            }
         }
     }
 
