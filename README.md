@@ -1,5 +1,8 @@
 # Intel 8080 Emulator
 
+[![build status](https://travis-ci.org/leahthecatlady/intel_8080_emulator.svg?branch=master)](https://travis-ci.org/leahthecatlady/intel_8080_emulator)
+[![Coverage Status](https://coveralls.io/repos/github/leahthecatlady/intel_8080_emulator/badge.svg?branch=master)](https://coveralls.io/github/leahthecatlady/intel_8080_emulator?branch=master)
+
 ## About
 
 This project is an exploration into rust and emulators. The current goal is to run Space Invaders via the developed emulator.
