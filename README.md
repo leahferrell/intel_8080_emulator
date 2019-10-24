@@ -7,6 +7,8 @@
 
 This project is an exploration into rust and emulators. The current goal is to run Space Invaders via the developed emulator.
 
+_Work on this project is currently on hold until I figure out a proper mechanism for creating a GUI in Rust_
+
 ## Resources
 
 1. [emulator101.com](http://emulator101.com/)
